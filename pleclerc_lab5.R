@@ -44,6 +44,12 @@ print(summ.table)
 summ.table.long <- summ.table |>
   pivot_longer(cols = -artist, names_to = "range_status", values_to = "count")
 
+library(xtable)
+print(xtable(summ.table,                                  # Table to print
+             caption = "Count of descriptor status for \"Allentown\" between artists.",   # Caption for the table
+             label = "tab:reference"),             # Label to reference (e.g., \ref{tab:reference})
+      table.placement = "H")                       # Places it [H]ere in the document
+
 ggplot(summ.table.long, aes(x = artist, y = count, fill = range_status)) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_hline(yintercept=0) +
